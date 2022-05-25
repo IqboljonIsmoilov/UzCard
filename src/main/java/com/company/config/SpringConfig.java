@@ -15,19 +15,19 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // authentication
         auth.inMemoryAuthentication()
-                .withUser("client").password("{noop}client").roles("Bank")
+                .withUser("client").password("{noop}client")
                 .and()
-                .withUser("profile").password("{noop}profilejon").roles("profile")
+                .withUser("profile").password("{noop}profilejon")
                 .and()
-                .withUser("bankjon").password("{noop}bankov").roles("bank");
+                .withUser("bankjon").password("{noop}bankov");
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Authorithtion
         http.authorizeHttpRequests()
-                .antMatchers("/catrgory/**").permitAll()
-                .antMatchers("/admin/**").hasAnyRole("admin")
+                .antMatchers("/client/**").permitAll()
+                .antMatchers("/client/**").hasAnyRole("client")
                 .antMatchers("/profile/**").hasAnyRole("profile")
                 .anyRequest().authenticated()
                 .and().httpBasic();

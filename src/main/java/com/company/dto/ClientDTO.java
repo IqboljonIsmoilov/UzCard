@@ -13,7 +13,7 @@ public class ClientDTO {
     private String name;
     private String surname;
     private String middleName;
-    private String photo;
+    private String phone;
     private String status;
     private LocalDateTime createdDate;
 }

@@ -10,8 +10,14 @@ import java.time.LocalDateTime;
 public class CardDTO {
 
     private String id;
+    private String name;
     private String number;
     private String phone;
+    private Boolean status;
+    private LocalDateTime expiredDate;
+    private LocalDateTime createDate;
     private Long balance;
-    private LocalDateTime UpdateDate;
+
+    private String clientId;
+    private String profileName;
 }

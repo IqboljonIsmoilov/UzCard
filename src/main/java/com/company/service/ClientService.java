@@ -20,7 +20,7 @@ public class ClientService {
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setMiddleName(dto.getMiddleName());
-        entity.setPhone(dto.getPhoto());
+        entity.setPhone(dto.getPhone());
         entity.setCreatedDate(dto.getCreatedDate());
 
         clientRepository.save(entity);
@@ -29,7 +29,7 @@ public class ClientService {
     }
 
     public Boolean update(ClientDTO dto, String phone) {
-        Optional<ClientEntity> optional = clientRepository.findByPhone(dto.getPhoto());
+        Optional<ClientEntity> optional = clientRepository.findByPhone(dto.getPhone());
         if (optional.isPresent()) {
             throw new PhoneAlreadyExistsException("Phone already exists");
         }

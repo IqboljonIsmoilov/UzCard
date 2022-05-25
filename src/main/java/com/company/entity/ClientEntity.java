@@ -29,6 +29,11 @@ public class ClientEntity {
     @Column(name = "phone_number")
     private String phone;
 
+    @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private ClientStatus status;
+
+    @Column(name = "profiled_name")
+    private String profileName;
+
 }
