@@ -11,8 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping("/client")
 @Api(tags = "client")
@@ -34,7 +32,7 @@ public class ClientController {
     @ApiOperation(value = "update", notes = "Method used for update info")
     @PutMapping("/update{phone}")
     public ResponseEntity<?> update(@RequestBody ClientDTO dto,
-                                    @PathVariable("phone") String phone){
+                                    @PathVariable("phone") String phone) {
         return ResponseEntity.ok(clientService.update(dto, phone));
     }
 

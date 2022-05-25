@@ -19,6 +19,7 @@ public class ClientService {
         ClientEntity entity = new ClientEntity();
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
+        entity.setMiddleName(dto.getMiddleName());
         entity.setPhone(dto.getPhoto());
         entity.setCreatedDate(dto.getCreatedDate());
 
@@ -27,15 +28,15 @@ public class ClientService {
         return dto;
     }
 
-    public String update(ClientDTO dto, String phone) {
+    public Boolean update(ClientDTO dto, String phone) {
         Optional<ClientEntity> optional = clientRepository.findByPhone(dto.getPhoto());
         if (optional.isPresent()) {
             throw new PhoneAlreadyExistsException("Phone already exists");
         }
-        Integer n = clientRepository.update(dto.getSurname(), dto.getName(), phone);
+        Integer n = clientRepository.update(dto.getName(), dto.getSurname(), dto.getMiddleName(), phone);
         if (n > 0) {
-            return "update";
+            return true;
         }
-        return "not update";
+        return false;
     }
 }

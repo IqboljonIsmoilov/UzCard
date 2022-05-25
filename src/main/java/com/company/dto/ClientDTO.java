@@ -12,6 +12,7 @@ public class ClientDTO {
     private String id;
     private String name;
     private String surname;
+    private String middleName;
     private String photo;
     private String status;
     private LocalDateTime createdDate;

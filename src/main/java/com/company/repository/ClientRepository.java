@@ -14,9 +14,10 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Integer> {
 
     @Transactional
     @Modifying
-    @Query("update ClientEntity set surname = :surname, name = :name where phone = :phone")
-    Integer update(@Param("surname") String surname,
-                   @Param("name") String name,
+    @Query("update ClientEntity set name = :name, surname = :surname, middleName = :middleName where phone = :phone")
+    Integer update(@Param("name") String name,
+                   @Param("surname") String surname,
+                   @Param("middleName") String middleName,
                    @Param("phone") String phone);
 
 }
