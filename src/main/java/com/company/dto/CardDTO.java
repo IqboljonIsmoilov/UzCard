@@ -15,7 +15,7 @@ public class CardDTO {
     private String phone;
     private Boolean status;
     private LocalDateTime expiredDate;
-    private LocalDateTime createDate;
+    private LocalDateTime createDate = LocalDateTime.now();
     private Long balance;
 
     private String clientId;

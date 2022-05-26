@@ -2,6 +2,8 @@ package com.company.controller;
 
 
 import com.company.dto.ClientDTO;
+import com.company.dto.update.PhoneUpdateDTO;
+import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.service.ClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -21,7 +23,8 @@ public class ClientController {
 
     private Logger log = LoggerFactory.getLogger(ClientController.class);
 
-    @ApiOperation(value = "Get", notes = "Method used for get client info")
+
+    @ApiOperation(value = "create", notes = "Method used for create info")
     @PostMapping("/create")
     public ResponseEntity<?> create(@RequestBody ClientDTO dto) {
         log.info("Create {}", dto);
@@ -33,7 +36,34 @@ public class ClientController {
     @PutMapping("/update{phone}")
     public ResponseEntity<?> update(@RequestBody ClientDTO dto,
                                     @PathVariable("phone") String phone) {
+        log.info("update {}", dto);
         return ResponseEntity.ok(clientService.update(dto, phone));
     }
+
+
+    @ApiOperation(value = "changeStatus", notes = "Method used for changeStatus info")
+    @PutMapping("/changeStatus{id}")
+    public ResponseEntity<?> changeStatus(@RequestBody UpdateClientStatusDTO dto,
+                                          @PathVariable("id") String id) {
+        return ResponseEntity.ok(clientService.changeStatus(dto, id));
+    }
+
+
+    @ApiOperation(value = "changePhone", notes = "Method used for changePhone info")
+    @PutMapping("/changePhone{id}")
+    public ResponseEntity<?> changePhone(@RequestBody PhoneUpdateDTO dto,
+                                         @PathVariable("id") String id) {
+        return ResponseEntity.ok(clientService.changePhone(dto, id));
+    }
+
+
+    @ApiOperation(value = "List", notes = "Method used for get list of profiles")
+    @GetMapping("/list")
+    public ResponseEntity<?> list(@RequestParam(value = "page", defaultValue = "0") int page,
+                                  @RequestParam(value = "size", defaultValue = "5") int size) {
+        log.info("LIST page={} size={}", page, size);
+        return ResponseEntity.ok(clientService.list(page, size));
+    }
+
 
 }
