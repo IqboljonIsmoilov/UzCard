@@ -1,8 +1,14 @@
 package com.company.service;
 
-import com.company.dto.CardDTO;
+import com.company.dto.response.CardResponseDTO;
+import com.company.dto.update.ChangeStatusCardDTO;
+import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.entity.CardEntity;
 import com.company.entity.ClientEntity;
+import com.company.enums.CardStatus;
+import com.company.enums.ClientStatus;
+import com.company.enums.Roles;
+import com.company.exception.AppBadRequestException;
 import com.company.exception.ItemNotFoundException;
 import com.company.repository.CardRepository;
 import org.slf4j.Logger;
@@ -20,9 +26,8 @@ public class CardService {
 
     private Logger log = LoggerFactory.getLogger(CardService.class);
 
-    public CardDTO create(CardDTO dto) {
+    public CardResponseDTO create(CardResponseDTO dto) {
         CardEntity entity = new CardEntity();
-        entity.setName(dto.getName());
         entity.setBalance(dto.getBalance());
         entity.setCreateDate(dto.getCreateDate());
         entity.setNumber(dto.getNumber());
@@ -45,6 +50,21 @@ public class CardService {
             log.warn("Not found {}", number);
             return new ItemNotFoundException("Not Found!");
         });
+    }
+
+    public Boolean changeStatus(ChangeStatusCardDTO dto, String id) {
+        CardEntity entity = getById(id);
+
+        Integer n = cardRepository.changeStatus(CardStatus.ACTIVE, id);
+
+        if (!entity.getStatus().equals(dto.getOldValue())) {
+            throw new AppBadRequestException(".........");
+        }
+
+        String status = dto.getNewValue();
+        entity.setStatus(CardStatus.valueOf(status));
+
+        return n > 0;
     }
 
 }

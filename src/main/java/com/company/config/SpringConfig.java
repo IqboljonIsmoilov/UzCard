@@ -36,6 +36,11 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .cors().disable();
 
         //  .and().formLogin();
+        //  .and().formLogin();
+        //  .and().formLogin();
+        //  .and().formLogin();
+        //  .and().formLogin();
+        //  .and().formLogin();
     }
 
 }

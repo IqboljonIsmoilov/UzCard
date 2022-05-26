@@ -7,6 +7,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UpdateClientStatusDTO extends UpdateDTO {
+public class ChangeStatusCardDTO extends UpdateDTO {
 
 }

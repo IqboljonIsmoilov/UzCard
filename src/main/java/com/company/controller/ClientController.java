@@ -1,8 +1,8 @@
 package com.company.controller;
 
 
-import com.company.dto.ClientDTO;
-import com.company.dto.update.PhoneUpdateDTO;
+import com.company.dto.response.ClientResponseDTO;
+import com.company.dto.update.UpdateClientPhoneDTO;
 import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.service.ClientService;
 import io.swagger.annotations.Api;
@@ -26,7 +26,7 @@ public class ClientController {
 
     @ApiOperation(value = "create", notes = "Method used for create info")
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody ClientDTO dto) {
+    public ResponseEntity<?> create(@RequestBody ClientResponseDTO dto) {
         log.info("Create {}", dto);
         return ResponseEntity.ok(clientService.create(dto));
     }
@@ -34,7 +34,7 @@ public class ClientController {
 
     @ApiOperation(value = "update", notes = "Method used for update info")
     @PutMapping("/update{phone}")
-    public ResponseEntity<?> update(@RequestBody ClientDTO dto,
+    public ResponseEntity<?> update(@RequestBody ClientResponseDTO dto,
                                     @PathVariable("phone") String phone) {
         log.info("update {}", dto);
         return ResponseEntity.ok(clientService.update(dto, phone));
@@ -51,7 +51,7 @@ public class ClientController {
 
     @ApiOperation(value = "changePhone", notes = "Method used for changePhone info")
     @PutMapping("/changePhone{id}")
-    public ResponseEntity<?> changePhone(@RequestBody PhoneUpdateDTO dto,
+    public ResponseEntity<?> changePhone(@RequestBody UpdateClientPhoneDTO dto,
                                          @PathVariable("id") String id) {
         return ResponseEntity.ok(clientService.changePhone(dto, id));
     }
@@ -64,6 +64,8 @@ public class ClientController {
         log.info("LIST page={} size={}", page, size);
         return ResponseEntity.ok(clientService.list(page, size));
     }
+
+
 
 
 }

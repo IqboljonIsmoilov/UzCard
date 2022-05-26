@@ -1,5 +1,7 @@
 package com.company.entity;
 
+import com.company.enums.CardStatus;
+import com.company.enums.ClientStatus;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -18,14 +20,15 @@ public class CardEntity {
     @Column(name = "uuid", unique = true)
     private String uuid;
 
-    @Column(name = "name")
-    private String name;
     @Column(name = "number", nullable = false)
     private String number;
+
     @Column(name = "balance")
     private Long balance;
+
     @Column(name = "phone")
     private String phone;
+
     @Column(name = "expiredDate")
     private LocalDateTime expiredDate;
 
@@ -41,5 +44,10 @@ public class CardEntity {
     @Column(name = "create_date")
     private LocalDateTime createDate;
 
+    @Column(name = "profile_name")
+    private String profileName;
 
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private CardStatus status;
 }

@@ -9,7 +9,7 @@ import javax.validation.constraints.NotNull;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class PhoneUpdateDTO {
+public class UpdateDTO {
 
     @NotNull(message = "to enter the Old Value !")
     private String oldValue;

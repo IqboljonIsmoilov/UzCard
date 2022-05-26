@@ -40,4 +40,6 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Integer> {
 
 
     Optional<ClientEntity> findById(UUID fromString);
+
+    Optional<ClientEntity> findByProfileName(String profileName);
 }

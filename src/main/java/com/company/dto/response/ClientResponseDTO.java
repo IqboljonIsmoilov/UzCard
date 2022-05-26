@@ -1,5 +1,6 @@
-package com.company.dto;
+package com.company.dto.response;
 
+import com.company.dto.request.ClientRequestDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -7,13 +8,10 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class ClientDTO {
+public class ClientResponseDTO extends ClientRequestDTO {
 
     private String id;
-    private String name;
-    private String surname;
-    private String middleName;
-    private String phone;
     private String status;
+    private String profileName;
     private LocalDateTime createdDate;
 }

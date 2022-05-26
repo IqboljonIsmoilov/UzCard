@@ -1,7 +1,6 @@
 package com.company.controller;
 
-import com.company.dto.CardDTO;
-import com.company.dto.ClientDTO;
+import com.company.dto.response.CardResponseDTO;
 import com.company.service.CardService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +25,7 @@ public class CardController {
 
     @ApiOperation(value = "create", notes = "Method used for create info")
     @PostMapping("/create")
-    public ResponseEntity<?> create(@RequestBody CardDTO dto) {
+    public ResponseEntity<?> create(@RequestBody CardResponseDTO dto) {
         log.info("Create {}", dto);
         return ResponseEntity.ok(cardService.create(dto));
     }

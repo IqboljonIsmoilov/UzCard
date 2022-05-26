@@ -4,16 +4,9 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.validation.constraints.NotNull;
-
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class UpdateClientDTO {
+public class UpdateClientDTO extends UpdateDTO {
 
-    @NotNull(message = "to enter the Old Value !")
-    private String oldValue;
-
-    @NotNull(message = "to enter the New Value !")
-    private String newValue;
 }

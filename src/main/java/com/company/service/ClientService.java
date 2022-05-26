@@ -1,10 +1,11 @@
 package com.company.service;
 
-import com.company.dto.ClientDTO;
-import com.company.dto.update.PhoneUpdateDTO;
+import com.company.dto.response.ClientResponseDTO;
+import com.company.dto.update.UpdateClientPhoneDTO;
 import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.entity.ClientEntity;
 import com.company.enums.ClientStatus;
+import com.company.enums.Roles;
 import com.company.exception.AppBadRequestException;
 import com.company.exception.ItemNotFoundException;
 import com.company.exception.PhoneAlreadyExistsException;
@@ -25,19 +26,19 @@ public class ClientService {
 
     @Autowired
     private ClientRepository clientRepository;
-
     private Logger log = LoggerFactory.getLogger(ClientService.class);
 
-    public ClientDTO create(ClientDTO dto) {
+    public ClientResponseDTO create(ClientResponseDTO dto) {
         ClientEntity entity = new ClientEntity();
         entity.setName(dto.getName());
         entity.setSurname(dto.getSurname());
         entity.setMiddleName(dto.getMiddleName());
         entity.setPhone(dto.getPhone());
+        entity.setProfileName(Roles.BANK);
         entity.setCreatedDate(dto.getCreatedDate());
 
         clientRepository.save(entity);
-        dto.setId(entity.getId());
+        dto.setId(entity.getUuid());
         return dto;
     }
 
@@ -48,7 +49,19 @@ public class ClientService {
         });
     }
 
-    public Boolean update(ClientDTO dto, String phone) {
+
+    public ClientResponseDTO getByClientId(String uuid, String profileName) {
+        var entity = clientRepository.findById(UUID.fromString(uuid))
+                .orElseThrow(() -> new ItemNotFoundException("client not found"));
+
+        if (!profileName.equals(Roles.ADMIN) || !clientRepository.findByProfileName(profileName)
+                .orElseThrow().getProfileName().equals(profileName))
+            throw new AppBadRequestException("not authorized!");
+
+        return toDTO(entity);
+    }
+
+    public Boolean update(ClientResponseDTO dto, String phone) {
         Optional<ClientEntity> optional = clientRepository.findByPhone(dto.getPhone());
         if (optional.isPresent()) {
             throw new PhoneAlreadyExistsException("Phone already exists");
@@ -65,8 +78,8 @@ public class ClientService {
 
         Integer n = clientRepository.changeStatus(ClientStatus.ACTIVE, id);
 
-        if (!entity.getStatus().equals(dto.getOldValue())) {
-            throw new AppBadRequestException("Invalid Old Password");
+        if (!entity.getStatus().equals(dto.getOldValue()) && !entity.getProfileName().equals(Roles.BANK)) {
+            throw new AppBadRequestException(".............");
         }
 
         String status = dto.getNewValue();
@@ -76,7 +89,7 @@ public class ClientService {
     }
 
 
-    public Boolean changePhone(PhoneUpdateDTO dto, String id) {
+    public Boolean changePhone(UpdateClientPhoneDTO dto, String id) {
         ClientEntity entity = getById(id);
 
         Integer n = clientRepository.changePhone(ClientStatus.ACTIVE, id);
@@ -90,13 +103,12 @@ public class ClientService {
         entity.setPhone(phone);
 
         return n > 0;
-
     }
 
-    public PageImpl<ClientDTO> list(int page, int size) {
+    public PageImpl<ClientResponseDTO> list(int page, int size) {
         Pageable pageable = PageRequest.of(page, size, Sort.by(Sort.Direction.DESC, "createdDate"));
 
-        List<ClientDTO> dtoList = new ArrayList<>();
+        List<ClientResponseDTO> dtoList = new ArrayList<>();
 
         Page<ClientEntity> entityPage = clientRepository.findAll(pageable);
         entityPage.forEach(entity -> {
@@ -106,15 +118,13 @@ public class ClientService {
         return new PageImpl<>(dtoList, pageable, entityPage.getTotalElements());
     }
 
-    public ClientDTO toDTO(ClientEntity entity) {
-        ClientDTO dto = new ClientDTO();
-        dto.setId(entity.getId());
+    public ClientResponseDTO toDTO(ClientEntity entity) {
+        ClientResponseDTO dto = new ClientResponseDTO();
+        dto.setId(entity.getUuid());
         dto.setName(entity.getName());
         dto.setSurname(entity.getSurname());
         dto.setStatus(String.valueOf(entity.getStatus()));
         dto.setCreatedDate(entity.getCreatedDate());
         return dto;
     }
-
-
 }

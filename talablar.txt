@@ -33,8 +33,8 @@
 +    3. Change Status (BANK)
 +    4. Change Phone (BANK)
 +    5. Client pagination (ADMIN)
-+    6. Get By Id (ADMIN)(PROFILE if client was created by this profile)
-    7. Get Porifle Client List (PROFILE)
+    6. Get By Client Id (ADMIN)(PROFILE if client was created by this profile)
+    7. Get Profile Client List Pagination (PROFILE)
 
 2. Card
 +    1. Create (BANK)
