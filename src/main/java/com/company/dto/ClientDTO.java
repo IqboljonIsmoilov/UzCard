@@ -1,6 +1,5 @@
 package com.company.dto;
 
-import com.company.enums.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,14 +9,15 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class TransactionDTO {
+
+public class ClientDTO {
     private String id;
-    private String fromCard;
-    private String toCard;
-    private Long amount;
-    private String profileName;
+    private String name;
+    private String surname;
+    private String middleName;
+    private String phone;
 
     private LocalDateTime createDate;
-    private Status status;
-
+    private String status;
+    private String profileName;
 }

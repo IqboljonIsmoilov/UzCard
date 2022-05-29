@@ -1,7 +1,7 @@
-package com.company.repository;
+package com.company.enums.repository;
 
 import com.company.entity.ClientEntity;
-import com.company.enums.ClientStatus;
+import com.company.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -28,14 +28,14 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Integer> {
     @Transactional
     @Modifying
     @Query("update ClientEntity set status = :status where id = :id")
-    Integer changeStatus(@Param("status") ClientStatus status,
+    Integer changeStatus(@Param("status") Status status,
                          @Param("id") String id);
 
 
     @Transactional
     @Modifying
     @Query("update ClientEntity  set ClientEntity.status = :status where ClientEntity.id = :pId")
-    Integer changePhone(@Param("status") ClientStatus status,
+    Integer changePhone(@Param("status") Status status,
                         @Param("pId") String id);
 
 

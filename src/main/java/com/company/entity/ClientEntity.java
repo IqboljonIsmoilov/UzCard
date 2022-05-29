@@ -1,7 +1,6 @@
 package com.company.entity;
 
-import com.company.enums.ClientStatus;
-import com.company.enums.Roles;
+import com.company.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -16,8 +15,8 @@ import java.time.LocalDateTime;
 public class ClientEntity {
 
     @Id
-    @GeneratedValue(generator="system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
+    @GeneratedValue(generator = "system-uuid")
+    @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String uuid;
     @Column(name = "name")
     private String name;
@@ -36,9 +35,8 @@ public class ClientEntity {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private ClientStatus status;
+    private Status status;
 
     @Column(name = "profiled_name")
-    private Roles profileName;
-
+    private String profileName;
 }

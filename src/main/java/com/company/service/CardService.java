@@ -1,16 +1,9 @@
 package com.company.service;
 
-import com.company.dto.response.CardResponseDTO;
-import com.company.dto.update.ChangeStatusCardDTO;
-import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.entity.CardEntity;
-import com.company.entity.ClientEntity;
-import com.company.enums.CardStatus;
-import com.company.enums.ClientStatus;
-import com.company.enums.Roles;
 import com.company.exception.AppBadRequestException;
 import com.company.exception.ItemNotFoundException;
-import com.company.repository.CardRepository;
+import com.company.enums.repository.CardRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

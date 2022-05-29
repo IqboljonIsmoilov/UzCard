@@ -33,5 +33,4 @@ public class TransactionEntity {
 
     @Column(name = "create_date")
     private LocalDateTime createDate;
-
 }

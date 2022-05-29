@@ -1,7 +1,6 @@
 package com.company.entity;
 
-import com.company.enums.CardStatus;
-import com.company.enums.ClientStatus;
+import com.company.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
@@ -49,5 +48,5 @@ public class CardEntity {
 
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
-    private CardStatus status;
+    private Status status;
 }

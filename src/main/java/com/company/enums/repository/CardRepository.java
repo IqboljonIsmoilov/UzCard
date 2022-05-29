@@ -1,7 +1,6 @@
-package com.company.repository;
+package com.company.enums.repository;
 
 import com.company.entity.CardEntity;
-import com.company.enums.CardStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,15 +1,11 @@
 package com.company.service;
 
-import com.company.dto.response.ClientResponseDTO;
-import com.company.dto.update.UpdateClientPhoneDTO;
-import com.company.dto.update.UpdateClientStatusDTO;
 import com.company.entity.ClientEntity;
-import com.company.enums.ClientStatus;
-import com.company.enums.Roles;
+import com.company.enums.Status;
 import com.company.exception.AppBadRequestException;
 import com.company.exception.ItemNotFoundException;
 import com.company.exception.PhoneAlreadyExistsException;
-import com.company.repository.ClientRepository;
+import com.company.enums.repository.ClientRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +30,6 @@ public class ClientService {
         entity.setSurname(dto.getSurname());
         entity.setMiddleName(dto.getMiddleName());
         entity.setPhone(dto.getPhone());
-        entity.setProfileName(Roles.BANK);
         entity.setCreatedDate(dto.getCreatedDate());
 
         clientRepository.save(entity);
@@ -76,14 +71,14 @@ public class ClientService {
     public Boolean changeStatus(UpdateClientStatusDTO dto, String id) {
         ClientEntity entity = getById(id);
 
-        Integer n = clientRepository.changeStatus(ClientStatus.ACTIVE, id);
+        Integer n = clientRepository.changeStatus(Status.ACTIVE, id);
 
         if (!entity.getStatus().equals(dto.getOldValue()) && !entity.getProfileName().equals(Roles.BANK)) {
             throw new AppBadRequestException(".............");
         }
 
         String status = dto.getNewValue();
-        entity.setStatus(ClientStatus.valueOf(status));
+        entity.setStatus(Status.valueOf(status));
 
         return n > 0;
     }
@@ -92,7 +87,7 @@ public class ClientService {
     public Boolean changePhone(UpdateClientPhoneDTO dto, String id) {
         ClientEntity entity = getById(id);
 
-        Integer n = clientRepository.changePhone(ClientStatus.ACTIVE, id);
+        Integer n = clientRepository.changePhone(Status.ACTIVE, id);
 
         if (!entity.getPhone().equals(dto.getOldValue())) {
             log.warn("Invalid Old Phone {}", id);

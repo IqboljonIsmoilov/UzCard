@@ -22,6 +22,7 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .withUser("bankjon").password("{noop}bankov");
     }
 
+
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Authorithtion
@@ -34,13 +35,5 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
 
         http.csrf().disable()
                 .cors().disable();
-
-        //  .and().formLogin();
-        //  .and().formLogin();
-        //  .and().formLogin();
-        //  .and().formLogin();
-        //  .and().formLogin();
-        //  .and().formLogin();
     }
-
 }
