@@ -16,7 +16,6 @@ public class ClientDTO {
     private String surname;
     private String middleName;
     private String phone;
-
     private LocalDateTime createDate;
     private String status;
     private String profileName;

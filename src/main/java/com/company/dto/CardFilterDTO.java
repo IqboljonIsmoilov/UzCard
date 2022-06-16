@@ -1,22 +1,17 @@
 package com.company.dto;
 
 import com.company.enums.Status;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
+import java.time.LocalDateTime;
 
 public class CardFilterDTO {
-    private String cliendId;
-    private String cardNumber;
-    private String cardId;
 
+    private String clientId;
+    private String CardNumber;
+    private String cardId;
     private Long fromAmount;
     private Long toAmount;
-
-    private String profileName;
+    private String profile_name;
     private Status status;
-
-
+    private LocalDateTime created_date;
 }

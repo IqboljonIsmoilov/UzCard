@@ -1,4 +1,4 @@
-package com.company.dto;
+package com.company.dto.request;
 
 import com.company.entity.BaseEntity;
 import lombok.Getter;
@@ -8,7 +8,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
-public class TransactionDTO extends BaseEntity {
+public class TransactionRequestDTO extends BaseEntity {
+
 
     private String id;
     private LocalDateTime createdDate;

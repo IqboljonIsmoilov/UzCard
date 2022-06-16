@@ -5,15 +5,14 @@ import com.company.entity.CardEntity;
 import com.company.entity.TransactionEntity;
 import com.company.enums.Status;
 import com.company.exception.ItemNotFoundException;
-import com.company.enums.repository.CardRepository;
-import com.company.enums.repository.TransactionRepository;
+import com.company.repository.CardRepository;
+import com.company.repository.TransactionRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,8 +44,7 @@ public class TransactionService {
             entity.setFromCard(fromCard.getNumber());
             entity.setToCard(toCard.getNumber());
             entity.setAmount(dto.getAmount());
-            entity.setProfileName(dto.getProfileName());
-            entity.setCreateDate(LocalDateTime.now());
+            entity.setCreatedDate(dto.getCreatedDate());
             entity.setStatus(Status.SUCCESS);
             transactionRepository.save(entity);
         } else if (fromCard.getBalance() < dto.getAmount()) {

@@ -1,6 +1,5 @@
 package com.company.dto;
 
-import com.company.enums.Status;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
@@ -18,9 +17,7 @@ public class CardDTO {
     private String status;
     private LocalDateTime createDate;
     private Long balance;
-
     private String clientId;
     private String clientPhone;
-
     //  ,,,phone,,,, Client, profile_name
 }

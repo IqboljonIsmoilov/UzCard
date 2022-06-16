@@ -22,7 +22,6 @@ public class SpringConfig extends WebSecurityConfigurerAdapter {
                 .withUser("bankjon").password("{noop}bankov");
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         // Authorithtion

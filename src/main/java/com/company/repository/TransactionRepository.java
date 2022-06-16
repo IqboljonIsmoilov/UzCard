@@ -1,4 +1,4 @@
-package com.company.enums.repository;
+package com.company.repository;
 
 import com.company.dto.CardDTO;
 import com.company.entity.TransactionEntity;
@@ -27,9 +27,6 @@ public interface TransactionRepository extends JpaRepository<TransactionEntity, 
     Page<TransactionEntity> findAllByProfileName(String profileName, Pageable pageable);
 
 
-
     @Query(value = "select te from TransactionEntity as te inner join te.card as c where c.clientId =:clientId")
     Page<TransactionEntity> findAllByClientId(@Param("clientId") String clientId, Pageable pageable);
-
-
 }

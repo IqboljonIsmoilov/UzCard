@@ -1,4 +1,4 @@
-package com.company.enums.repository.custom;
+package com.company.repository;
 
 import com.company.dto.CardDTO;
 import com.company.dto.CardFilterDTO;
@@ -15,7 +15,7 @@ public class CardCustomRepository {
     private EntityManager entityManager;
 
 
-    public List<CardDTO> filter(CardFilterDTO dto){
+    public List<CardDTO> filter(CardFilterDTO dto) {
 
         String sql = "SELECT c FROM CardEntity as c ";
         Query query = entityManager.createQuery(sql, CardEntity.class);
@@ -23,11 +23,4 @@ public class CardCustomRepository {
 
         return null;
     }
-
-
-
-
-
-
-
 }

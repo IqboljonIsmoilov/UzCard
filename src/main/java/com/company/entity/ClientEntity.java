@@ -1,5 +1,6 @@
 package com.company.entity;
 
+import com.company.enums.Roles;
 import com.company.enums.Status;
 import lombok.Getter;
 import lombok.Setter;
@@ -38,5 +39,5 @@ public class ClientEntity {
     private Status status;
 
     @Column(name = "profiled_name")
-    private String profileName;
+    private Roles profileName;
 }

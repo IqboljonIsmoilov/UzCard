@@ -6,7 +6,7 @@ import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -17,7 +17,7 @@ public class CardEntity {
     @GeneratedValue(generator = "system-uuid")
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     @Column(name = "uuid", unique = true)
-    private String uuid;
+    private String id;
 
     @Column(name = "number", nullable = false)
     private String number;
@@ -29,7 +29,7 @@ public class CardEntity {
     private String phone;
 
     @Column(name = "expiredDate")
-    private LocalDateTime expiredDate;
+    private LocalDate expiredDate;
 
     @Column(name = "client_id")
     private String clientId;
@@ -41,7 +41,7 @@ public class CardEntity {
     private String clientPhone;
 
     @Column(name = "create_date")
-    private LocalDateTime createDate;
+    private LocalDate createDate;
 
     @Column(name = "profile_name")
     private String profileName;

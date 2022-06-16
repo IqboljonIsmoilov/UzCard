@@ -1,4 +1,4 @@
-package com.company.enums.repository;
+package com.company.repository;
 
 import com.company.entity.ClientEntity;
 import com.company.enums.Status;

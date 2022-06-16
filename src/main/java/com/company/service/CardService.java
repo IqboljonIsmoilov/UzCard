@@ -1,23 +1,24 @@
 package com.company.service;
 
+import com.company.dto.responce.CardResponseDTO;
 import com.company.entity.CardEntity;
-import com.company.exception.AppBadRequestException;
+import com.company.enums.Status;
 import com.company.exception.ItemNotFoundException;
-import com.company.enums.repository.CardRepository;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.company.repository.CardRepository;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
 @Service
+@Slf4j
+@RequiredArgsConstructor
 public class CardService {
 
-    @Autowired
-    private CardRepository cardRepository;
 
-    private Logger log = LoggerFactory.getLogger(CardService.class);
+    private final CardRepository cardRepository;
+
 
     public CardResponseDTO create(CardResponseDTO dto) {
         CardEntity entity = new CardEntity();
@@ -27,7 +28,7 @@ public class CardService {
         entity.setExpiredDate(dto.getExpiredDate());
 
         cardRepository.save(entity);
-        dto.setId(entity.getUuid());
+        dto.setId(entity.getId());
         return dto;
     }
 
@@ -45,19 +46,10 @@ public class CardService {
         });
     }
 
-    public Boolean changeStatus(ChangeStatusCardDTO dto, String id) {
-        CardEntity entity = getById(id);
+    public Boolean changeStatus(Status dto, String id) {
 
-        Integer n = cardRepository.changeStatus(CardStatus.ACTIVE, id);
-
-        if (!entity.getStatus().equals(dto.getOldValue())) {
-            throw new AppBadRequestException(".........");
-        }
-
-        String status = dto.getNewValue();
-        entity.setStatus(CardStatus.valueOf(status));
+        Integer n = cardRepository.changeStatus(Status.ACTIVE, id);
 
         return n > 0;
     }
-
 }

@@ -1,6 +1,7 @@
-package com.company.enums.repository;
+package com.company.repository;
 
 import com.company.entity.CardEntity;
+import com.company.enums.Status;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;
@@ -11,5 +12,5 @@ public interface CardRepository extends JpaRepository<CardEntity, Integer> {
 
     Optional<CardEntity> findByNumber(String number);
 
-    Integer changeStatus(CardStatus status, String id);
+    Integer changeStatus(Status status, String id);
 }

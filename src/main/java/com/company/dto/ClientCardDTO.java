@@ -9,5 +9,4 @@ public class ClientCardDTO {
     private String id;
     private String number;
     private String phone;
-
 }
